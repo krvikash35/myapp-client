@@ -1,0 +1,15 @@
+.container {
+  display: inline-flex;
+  max-width: 100px;
+  height: 40px;
+  align-items: center;
+}
+
+.icon {
+  width: 40px;
+  height: 40px;
+}
+
+.appName {
+  display: inline-flex;
+}
