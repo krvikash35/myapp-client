@@ -16,9 +16,13 @@ class App extends React.Component {
             <Avatar src={logo} />
             App
             <Menu mode="horizontal" className={css.menu}>
-              <Menu.Item key="1">Login</Menu.Item>
-              <Menu.Item key="2">Logout</Menu.Item>
-              <SubMenu title={<Icon type="user" />}>
+              <Menu.Item key="1" className={css.menuItem}>
+                Login
+              </Menu.Item>
+              <Menu.Item key="2" className={css.menuItem}>
+                Logout
+              </Menu.Item>
+              <SubMenu title={<Icon type="user" />} className={css.userMenu}>
                 <Menu.Item
                   disabled={true}
                   key="setting:1"
@@ -38,7 +42,8 @@ class App extends React.Component {
             </Menu>
           </Header>
           <Content className={css.content}>
-            content
+            contentcontentconte ntcontentc ontentcontentcont entcontentconte
+            ntcontentcontentcontent contentcontentcontentco ntentcontentcontent
             <br />
             content
             <br />
@@ -52,9 +57,6 @@ class App extends React.Component {
             <br />
             content
             <br />
-            content
-            <br />
-            content
             <br />
           </Content>
           <Footer className={css.footer}>

@@ -14,6 +14,7 @@
 .content {
   background-color: white;
   margin-top: 64px;
+  width: 100%;
 }
 
 .footer {
@@ -27,6 +28,12 @@
 .menu {
   line-height: 64px;
   float: right;
+  border-bottom: none;
+}
+
+.userMenu {
+  background-color: white;
+  border-bottom: 2px solid #eeeeee !important;
 }
 
 .menuUserInfo {
@@ -39,13 +46,16 @@
 }
 
 .fullName {
+  font-weight: 700;
   padding: 0;
   margin: 0;
   line-height: 1.5;
+  color: rgba(0, 0, 0, 0.65);
 }
 
 .username {
   padding: 0;
   margin: 0;
   line-height: 1.5;
+  color: rgba(0, 0, 0, 0.65);
 }
