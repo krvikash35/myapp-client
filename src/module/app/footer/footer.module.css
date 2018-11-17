@@ -1,0 +1,9 @@
+.footer {
+  background-color: white;
+  border-top: 1px solid #eeeeee;
+  text-align: center;
+}
+
+.link {
+  color: rgba(0, 0, 0, 0.65);
+}

@@ -2,60 +2,8 @@
   background-color: white;
 }
 
-.header {
-  background-color: white;
-  box-shadow: 1px 1px 1px 1px #eeeeee;
-  padding: 0 10px;
-  position: fixed;
-  z-index: 1;
-  width: 100%;
-}
-
 .content {
   background-color: white;
   margin-top: 64px;
   width: 100%;
-}
-
-.footer {
-  text-align: center;
-}
-
-.link {
-  color: rgba(0, 0, 0, 0.65);
-}
-
-.menu {
-  line-height: 64px;
-  float: right;
-  border-bottom: none;
-}
-
-.userMenu {
-  background-color: white;
-  border-bottom: 2px solid #eeeeee !important;
-}
-
-.menuUserInfo {
-  height: 40px !important;
-}
-
-.userInfoContainer {
-  display: flex;
-  flex-direction: column;
-}
-
-.fullName {
-  font-weight: 700;
-  padding: 0;
-  margin: 0;
-  line-height: 1.5;
-  color: rgba(0, 0, 0, 0.65);
-}
-
-.username {
-  padding: 0;
-  margin: 0;
-  line-height: 1.5;
-  color: rgba(0, 0, 0, 0.65);
 }
