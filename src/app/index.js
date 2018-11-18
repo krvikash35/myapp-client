@@ -4,10 +4,11 @@ import css from "./app.module.css";
 import Footer from "./footer";
 import Header from "./header";
 import Routing from "./route";
-import { withRouter } from "react-router-dom";
+import { withRouter, Route } from "react-router-dom";
 import getCurrentUser from "./api";
 import Loader from "../components/loader";
 import { TOKEN_NAME, APP_NAME } from "../utils/constants";
+import Feed from "../feed";
 
 class App extends React.Component {
   constructor(props) {
@@ -29,17 +30,20 @@ class App extends React.Component {
     }
   }
 
+  componentWillUnmount() {}
+
   async loadCurrentUser() {
     try {
+      this.setState({});
       this.setState({ isLoading: true });
       const user = await getCurrentUser();
-      console.log("app setstate");
       this.setState({
         isLoading: false,
         isLoggedin: true,
         username: user.username,
         fullname: user.fullname
       });
+      this.setState({});
     } catch (error) {
       this.setState({ isLoading: false });
     }
@@ -83,6 +87,8 @@ class App extends React.Component {
         </Layout>
       </>
     );
+
+    return <Feed />;
   }
 }
 

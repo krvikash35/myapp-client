@@ -1,15 +1,23 @@
 import React from "react";
 import css from "./post.module.css";
-import { Avatar, Icon } from "antd";
+import { Avatar, Icon, Button } from "antd";
 import { getAvatarColor, getTimeDifference } from "../utils/api";
 
 export default function Post(props) {
-  const { createdByUser, createdAt, likedBy, title, content } = props;
-  const { fullname, username } = createdByUser;
+  const {
+    createdByUser,
+    createdAt,
+    likedBy,
+    title,
+    content,
+    loggedinUserID
+  } = props;
+  const { fullname, username, _id: createdByUserID } = createdByUser;
   const likesCount = likedBy.length;
   const avatarColor = getAvatarColor("vikash kuma");
   const shortName = fullname.split(" ").reduce((s = "", n) => s + n[0], "");
   const postedAgo = getTimeDifference(new Date(createdAt));
+  const isLiked = likedBy.some(p => p === createdByUserID);
 
   return (
     <div className={css.post}>
@@ -39,7 +47,15 @@ export default function Post(props) {
             (likesCount === 1 ? "1 Like" : likesCount + " Likes")}
         </div>
         <div className={css.footerRight}>
-          <Icon type="heart" style={{ fontSize: "25px" }} />
+          {isLiked ? (
+            <Button className={css.likedHeart} shape="circle">
+              <Icon type="heart" theme="filled" />
+            </Button>
+          ) : (
+            <Button className={css.heart} shape="circle">
+              <Icon type="heart" />
+            </Button>
+          )}
         </div>
       </div>
     </div>

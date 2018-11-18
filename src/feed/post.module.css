@@ -67,3 +67,20 @@
 .footerRight {
   margin-right: 5px;
 }
+
+.heart {
+  color: rgba(0, 0, 0, 0.65);
+  border-color: rgba(0, 0, 0, 0.65);
+}
+.likedHeart:hover,
+.likedHeart:focus,
+.heart:hover,
+.heart:focus {
+  color: darkred;
+  border-color: darkred;
+}
+
+.likedHeart {
+  color: darkred;
+  border-color: darkred;
+}

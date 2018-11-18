@@ -47,7 +47,10 @@ const Header = function Header(props) {
 
   return (
     <Layout.Header className={css.header}>
-      <Avatar src={logo} /> {APP_NAME}
+      <Link to="/">
+        <Avatar src={logo} /> {APP_NAME}
+      </Link>
+
       <Menu
         mode="horizontal"
         className={css.menu}

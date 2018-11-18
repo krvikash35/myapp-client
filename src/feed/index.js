@@ -2,27 +2,38 @@ import React from "react";
 import css from "./feed.module.css";
 import { Card, List } from "antd";
 import Post from "./post";
+import Loader from "../components/loader";
+import getPosts from "./api";
 
 import { demoPostsData } from "../utils/constants";
 
 class Feed extends React.Component {
   constructor(props) {
     super(props);
+    this.loadPosts = this.loadPosts.bind(this);
     this.state = {
-      posts: demoPostsData
+      isLoading: false,
+      posts: []
     };
   }
 
+  componentDidMount() {
+    this.loadPosts();
+  }
+
+  async loadPosts() {
+    this.setState({ isLoading: true });
+    const posts = await getPosts();
+    this.setState({ isLoading: false, posts });
+  }
+
   render() {
-    return (
-      <div className={css.container}>
-        <Post {...demoPostsData[0]} />
-        <Post {...demoPostsData[1]} />
-        <Post {...demoPostsData[2]} />
-        <Post {...demoPostsData[3]} />
-        <Post {...demoPostsData[4]} />
-      </div>
-    );
+    const { isLoading } = this.state;
+    if (isLoading) return <Loader />;
+    const postList = this.state.posts.map(post => (
+      <Post key={post._id} {...post} />
+    ));
+    return <div className={css.container}>{postList}</div>;
   }
 }
 
