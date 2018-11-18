@@ -1,21 +1,21 @@
 import React from "react";
 import { Layout, Menu, Dropdown, Icon, Avatar } from "antd";
 import css from "./header.module.css";
-import logo from "../../../static/images/brand_icon_32x32.png";
-import { APP_NAME } from "../../../constants";
+import logo from "../static/images/brand_icon_32x32.png";
+import { APP_NAME } from "../utils/constants";
 import { Link, withRouter } from "react-router-dom";
 
 const Header = function Header(props) {
-  const { isLoggedIn, location } = props;
+  const { isLoggedin, location, fullname, username, onLogout } = props;
   let menu;
 
-  if (isLoggedIn) {
+  if (isLoggedin) {
     const userSubmenu = (
       <Menu>
         <Menu.Item disabled={true} key="userInfo">
           <span className={css.userInfoContainer}>
-            <span className={css.fullName}>Vikash Kumar</span>
-            <span className={css.username}>@krvikash35 </span>
+            <span className={css.fullName}>{fullname}</span>
+            <span className={css.username}>@{username} </span>
           </span>
         </Menu.Item>
         <Menu.Divider />
@@ -23,7 +23,10 @@ const Header = function Header(props) {
         <Menu.Item key="/posts">Posts</Menu.Item>
         <Menu.Item key="/polls">Polls</Menu.Item>
         <Menu.Item key="/todos">Todos</Menu.Item>
-        <Menu.Item key="/logout">Logout</Menu.Item>
+        <Menu.Item key="/logout" onClick={onLogout}>
+          <Icon type="logout" style={{ color: "red" }} />
+          Logout
+        </Menu.Item>
       </Menu>
     );
     menu = (

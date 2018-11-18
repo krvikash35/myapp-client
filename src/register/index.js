@@ -5,33 +5,10 @@ import { vlaidateField, vlaidateFields } from "./util";
 import register from "./api";
 import { withRouter } from "react-router-dom";
 
-const formItemLayout = {
-  labelCol: {
-    xs: { span: 24 },
-    sm: { span: 8 }
-  },
-  wrapperCol: {
-    xs: { span: 24 },
-    sm: { span: 16 }
-  }
-};
-
-const tailFormItemLayout = {
-  wrapperCol: {
-    xs: {
-      span: 24,
-      offset: 0
-    },
-    sm: {
-      span: 16,
-      offset: 8
-    }
-  }
-};
-
 class Register extends React.Component {
   constructor(props) {
     super(props);
+    this._isMounted = false;
     this.handleFormSubmit = this.handleFormSubmit.bind(this);
     this.handleInputChange = this.handleInputChange.bind(this);
     this.isFormValid = this.isFormValid.bind(this);
@@ -55,6 +32,13 @@ class Register extends React.Component {
     };
   }
 
+  componentDidMount() {
+    this._isMounted = true;
+  }
+  componentWillUnmount() {
+    this._isMounted = false;
+  }
+
   async handleFormSubmit(e) {
     e.preventDefault();
     if (this.isFormValid()) {
@@ -66,11 +50,13 @@ class Register extends React.Component {
           username: this.state.username.value,
           password: this.state.password.value
         });
+        if (!this._isMounted) return;
         this.setState({ isLoading: false });
         await hideLoader();
         await message.success(msg, 1);
         this.props.history.push("/login");
       } catch (err) {
+        if (!this._isMounted) return;
         this.setState({ isLoading: false });
         await hideLoader();
         await message.error(err.message);
@@ -104,10 +90,9 @@ class Register extends React.Component {
   render() {
     const { fullname, username, password, isLoading } = this.state;
     return (
-      <div className={css.formContainer} onSubmit={this.handleFormSubmit}>
+      <div className={css.container} onSubmit={this.handleFormSubmit}>
         <Form className={css.form}>
           <Form.Item
-            {...formItemLayout}
             required
             label="Full Name"
             validateStatus={fullname.validateStatus}
@@ -116,12 +101,12 @@ class Register extends React.Component {
             <Input
               name="fullname"
               size="large"
+              placeholder="Enter your full name"
               value={fullname.value}
               onChange={this.handleInputChange}
             />
           </Form.Item>
           <Form.Item
-            {...formItemLayout}
             required
             label="Username"
             validateStatus={username.validateStatus}
@@ -130,12 +115,12 @@ class Register extends React.Component {
             <Input
               name="username"
               size="large"
+              placeholder="Enter unique username"
               value={username.value}
               onChange={this.handleInputChange}
             />
           </Form.Item>
           <Form.Item
-            {...formItemLayout}
             required
             label="Password"
             validateStatus={password.validateStatus}
@@ -145,11 +130,12 @@ class Register extends React.Component {
               type="password"
               name="password"
               size="large"
+              placeholder="Enter memorable password"
               value={password.value}
               onChange={this.handleInputChange}
             />
           </Form.Item>
-          <Form.Item {...tailFormItemLayout}>
+          <Form.Item>
             <Button
               htmlType="submit"
               type="primary"
