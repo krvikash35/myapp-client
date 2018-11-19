@@ -6,7 +6,7 @@ import { likePost, unlikePost } from "./api";
 import { APP_NAME } from "../../utils/constants";
 import { withRouter } from "react-router-dom";
 
-class Post extends React.Component {
+class Post extends React.PureComponent {
   constructor(props) {
     super(props);
     this.likePost = this.likePost.bind(this);
@@ -52,8 +52,10 @@ class Post extends React.Component {
   }
 
   render() {
+    console.log("rendered", this.props._id);
     const { likedBy } = this.state;
     const {
+      _id,
       createdByUser,
       createdAt,
       title,
@@ -95,6 +97,7 @@ class Post extends React.Component {
           <div className={css.footerLeft}>
             {likesCount > 0 &&
               (likesCount === 1 ? "1 Like" : likesCount + " Likes")}
+            {_id}
           </div>
           <div className={css.footerRight}>
             {isLiked ? (
