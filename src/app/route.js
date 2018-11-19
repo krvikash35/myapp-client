@@ -32,7 +32,7 @@ const RouteProtected = ({ component: Component, isLoggedin, ...rest }) => (
 );
 
 export default function Routing(props) {
-  const { isLoggedin, onLogin } = props;
+  const { isLoggedin, onLogin, userid } = props;
   return (
     <Switch>
       <RouteProtected
@@ -46,7 +46,12 @@ export default function Routing(props) {
         path="/register"
         component={Register}
       />
-      <Route isLoggedin={isLoggedin} path="/" component={Feed} />
+      <Route
+        path="/"
+        render={props => (
+          <Feed userid={userid} isLoggedin={isLoggedin} {...props} />
+        )}
+      />
     </Switch>
   );
 }

@@ -20,7 +20,8 @@ class App extends React.Component {
       isLoading: false,
       isLoggedin: false,
       username: "",
-      fullname: ""
+      fullname: "",
+      userid: ""
     };
   }
 
@@ -41,7 +42,8 @@ class App extends React.Component {
         isLoading: false,
         isLoggedin: true,
         username: user.username,
-        fullname: user.fullname
+        fullname: user.fullname,
+        userid: user._id
       });
       this.setState({});
     } catch (error) {
@@ -67,7 +69,7 @@ class App extends React.Component {
   }
 
   render() {
-    const { isLoggedin, username, fullname, isLoading } = this.state;
+    const { isLoggedin, username, fullname, isLoading, userid } = this.state;
     if (isLoading) {
       return <Loader />;
     }
@@ -80,10 +82,16 @@ class App extends React.Component {
             fullname={fullname}
             onLogout={this.onLogout}
           />
+          {/* <div className={css.contentArea}> */}
           <Layout.Content className={css.content}>
-            <Routing isLoggedin={isLoggedin} onLogin={this.onLogin} />
+            <Routing
+              userid={userid}
+              isLoggedin={isLoggedin}
+              onLogin={this.onLogin}
+            />
           </Layout.Content>
           <Footer />
+          {/* </div> */}
         </Layout>
       </>
     );

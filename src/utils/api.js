@@ -1,11 +1,17 @@
 import history from "./history";
 import { TOKEN_NAME } from "./constants";
 
-export default async function request(path, body) {
+export default async function request(path, body, methodOption) {
   const url = process.env.REACT_APP_API_BASE_URL
     ? process.env.REACT_APP_API_BASE_URL + path
     : path;
-  const method = body ? "POST" : "GET";
+
+  let method = "GET";
+  if (methodOption) {
+    method = methodOption;
+  } else if (body) {
+    method = "POST";
+  }
   const headers = new Headers({
     "Content-type": "application/json"
   });
