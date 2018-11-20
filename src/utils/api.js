@@ -74,3 +74,29 @@ export function getTimeDifference(date) {
     return Math.round(elapsed / msPerYear) + " years ago";
   }
 }
+
+export function debounce(fn, time = 0.5) {
+  let timeout;
+  return (...args) => {
+    clearTimeout(timeout);
+    timeout = setTimeout(() => {
+      console.log("finished");
+      timeout = null;
+      fn(...args);
+    }, time * 1000);
+  };
+}
+
+export function throttle(fn, time = 1) {
+  let wait = false;
+  return (...args) => {
+    if (!wait) {
+      wait = true;
+      fn(...args);
+      setTimeout(() => {
+        wait = false;
+        console.log("finished");
+      }, time * 1000);
+    }
+  };
+}

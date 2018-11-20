@@ -3,3 +3,17 @@
   margin: auto;
   padding: 20px 10px;
 }
+
+.infoCard {
+  /* background-color: red; */
+  width: 200px;
+  height: 50px;
+  border-radius: 4px;
+  text-align: center;
+  vertical-align: middle;
+  line-height: 50px;
+  border: 2px dotted #eeeeee;
+  font-size: 20px;
+  margin: auto;
+  color: cadetblue;
+}
