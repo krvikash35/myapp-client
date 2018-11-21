@@ -54,7 +54,6 @@ class Post extends React.PureComponent {
   }
 
   render() {
-    console.log("render");
     const { likedBy } = this.state;
     const {
       _id: postid,

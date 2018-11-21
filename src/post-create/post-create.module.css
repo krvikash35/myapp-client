@@ -1,0 +1,27 @@
+.postCreate {
+  padding: 0;
+  width: 100%;
+  position: fixed;
+  /* bottom: calc(var(--footer-height) + 10px); */
+  bottom: 30px;
+  right: 0;
+  display: flex;
+  justify-content: center;
+}
+
+.container {
+  padding: 0;
+  bottom: 0;
+  right: 0;
+  max-width: var(--max-all-content-width);
+  flex-grow: 1;
+  display: flex;
+  flex-direction: row-reverse;
+  padding-right: 30px;
+}
+
+.createBtn {
+  box-shadow: 2px 2px 5px 0px grey;
+  height: 50px;
+  width: 50px;
+}

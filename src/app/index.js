@@ -9,6 +9,7 @@ import getCurrentUser from "./api";
 import Loader from "../components/loader";
 import { TOKEN_NAME, APP_NAME } from "../utils/constants";
 import Feed from "../feed";
+import PostCreate from "../post-create";
 
 class App extends React.Component {
   constructor(props) {
@@ -82,7 +83,6 @@ class App extends React.Component {
             fullname={fullname}
             onLogout={this.onLogout}
           />
-          {/* <div className={css.contentArea}> */}
           <Layout.Content className={css.content}>
             <Routing
               userid={userid}
@@ -90,8 +90,8 @@ class App extends React.Component {
               onLogin={this.onLogin}
             />
           </Layout.Content>
+          <PostCreate />
           <Footer />
-          {/* </div> */}
         </Layout>
       </>
     );

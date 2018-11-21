@@ -3,3 +3,9 @@ from = "/*"
 to = "/index.html"
 status = 200
 force = false
+
+[[redirects]]
+from = "https://zealous-leakey-a39cb4.netlify.com/*"
+to = "https://social.sysleaf.com/:splat"
+status = 301
+force = true

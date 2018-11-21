@@ -17,3 +17,8 @@ code {
 #root {
   height: 100%;
 }
+
+:root {
+  --max-all-content-width: 1000px;
+  --footer-height: 65px;
+}

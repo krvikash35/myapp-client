@@ -92,6 +92,7 @@ class Feed extends React.Component {
   }
 
   render() {
+    console.log("parent rendering");
     const { isLoading, isLoadingMore, isLastPage, posts } = this.state;
     const { isLoggedin, userid } = this.props;
 
