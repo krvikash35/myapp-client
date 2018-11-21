@@ -1,5 +1,6 @@
 export const APP_NAME = "Myapp";
 export const TOKEN_NAME = "token";
+export const ADD_NEW_POST_FEED = "ADD_NEW_POST_FEED";
 
 export const demoPostsData = [
   {

@@ -1,12 +1,14 @@
 import React from "react";
-import { Modal, Button, Form, Input, Alert } from "antd";
+import { Modal, Button, Form, Input, message, notification } from "antd";
 import createPost from "./api";
+import { APP_NAME, ADD_NEW_POST_FEED } from "../utils/constants";
+import myevent from "../utils/event";
 
 class PostCreateDialog extends React.Component {
   state = {
     title: "",
     content: "",
-    isLoading: true,
+    isLoading: false,
     errMsg: ""
   };
 
@@ -15,13 +17,22 @@ class PostCreateDialog extends React.Component {
     const title = this.state.title;
     const content = this.state.content;
     if (!title || !content) {
-      this.setState({ errMsg: "Please enter title and content" });
+      message.error("Please enter title and content");
     } else {
       try {
-        await createPost(title, content);
-        this.setState({ isLoading: false, errMsg: "" });
+        this.setState({ isLoading: true });
+        const res = await createPost(title, content);
+        this.setState({ isLoading: false });
+        console.log("redata", res.data);
+        myevent.dispatch(ADD_NEW_POST_FEED, res.data._id);
+        this.props.closeDialog();
+        notification.success({
+          message: APP_NAME,
+          description: res.message
+        });
       } catch (error) {
-        this.setState({ isLoading: false, errMsg: error.message });
+        message.error(error.message);
+        this.setState({ isLoading: false });
       }
     }
   };
@@ -36,17 +47,17 @@ class PostCreateDialog extends React.Component {
 
   render() {
     const { isOpen, closeDialog } = this.props;
-    const { errMsg } = this.state;
+    const { isLoading } = this.state;
 
     return (
       <div>
         <Modal
           title="Create New Post"
           visible={isOpen}
-          onOk={closeDialog}
           onCancel={closeDialog}
           centered={true}
           footer={null}
+          destroyOnClose
         >
           <Form onSubmit={this.handleFormSubmit}>
             <Form.Item label="Title">
@@ -58,18 +69,18 @@ class PostCreateDialog extends React.Component {
             </Form.Item>
             <Form.Item label="Content">
               <Input.TextArea
+                rows={3}
                 name="content"
                 placeholder="Enter post content"
                 onChange={this.handleInputChange}
               />
             </Form.Item>
             <Form.Item>
-              <Button type="primary" htmlType="submit">
+              <Button type="primary" htmlType="submit" loading={isLoading}>
                 Submit
               </Button>
             </Form.Item>
           </Form>
-          {errMsg && <Alert message={errMsg} type="error" />}
         </Modal>
       </div>
     );

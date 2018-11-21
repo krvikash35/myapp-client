@@ -19,10 +19,6 @@ const Header = function Header(props) {
           </span>
         </Menu.Item>
         <Menu.Divider />
-        <Menu.Item key="/dashboard">Dashboard</Menu.Item>
-        <Menu.Item key="/posts">Posts</Menu.Item>
-        <Menu.Item key="/polls">Polls</Menu.Item>
-        <Menu.Item key="/todos">Todos</Menu.Item>
         <Menu.Item key="/logout" onClick={onLogout}>
           <Icon type="logout" style={{ color: "red" }} />
           Logout

@@ -61,15 +61,25 @@ export function getTimeDifference(date) {
   var elapsed = new Date() - date;
 
   if (elapsed < msPerMinute) {
-    return Math.round(elapsed / 1000) + " seconds ago";
+    const t = Math.round(elapsed / 1000);
+    if (t <= 1) return "Now";
+    return t + " seconds ago";
   } else if (elapsed < msPerHour) {
-    return Math.round(elapsed / msPerMinute) + " minutes ago";
+    const t = Math.round(elapsed / msPerMinute);
+    if (t <= 1) return "1 minute ago";
+    return t + " Minutes ago";
   } else if (elapsed < msPerDay) {
-    return Math.round(elapsed / msPerHour) + " hours ago";
+    const t = Math.round(elapsed / msPerHour);
+    if (t <= 1) return "1 hour ago";
+    return t + " hours ago";
   } else if (elapsed < msPerMonth) {
-    return Math.round(elapsed / msPerDay) + " days ago";
+    const t = Math.round(elapsed / msPerDay);
+    if (t <= 1) return "1 day ago";
+    return t + " days ago";
   } else if (elapsed < msPerYear) {
-    return Math.round(elapsed / msPerMonth) + " months ago";
+    const t = Math.round(elapsed / msPerMonth);
+    if (t <= 1) return "1 month ago";
+    return t + " months ago";
   } else {
     return Math.round(elapsed / msPerYear) + " years ago";
   }

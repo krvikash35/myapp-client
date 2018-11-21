@@ -3,11 +3,11 @@ import css from "./feed.module.css";
 import { notification } from "antd";
 import Post from "../components/post";
 import Loader from "../components/loader";
-import getPosts from "./api";
+import getPosts, { getPostsByID } from "./api";
 import { POST_SIZE_PER_FETCH } from "./constants";
-
-import { demoPostsData, APP_NAME } from "../utils/constants";
+import { demoPostsData, APP_NAME, ADD_NEW_POST_FEED } from "../utils/constants";
 import { debounce, throttle } from "../utils/api";
+import myevent from "../utils/event";
 
 class Feed extends React.Component {
   constructor(props) {
@@ -16,6 +16,7 @@ class Feed extends React.Component {
     this.loadPosts = this.loadPosts.bind(this);
     this.handleScroll = this.handleScroll.bind(this);
     this.handleScrollDebounced = debounce(this.handleScroll);
+    this.addNewPostToFeed = this.addNewPostToFeed.bind(this);
     this.page = 1;
     this.ticking = false;
     this.lastPos = 0;
@@ -33,13 +34,25 @@ class Feed extends React.Component {
     this._isUnmounted = false;
     this.loadPosts();
     window.addEventListener("scroll", this.handleScrollDebounced);
+    myevent.subscribe(this.addNewPostToFeed);
   }
 
   componentWillUnmount() {
     this._isUnmounted = true;
     window.removeEventListener("scroll", this.handleScrollDebounced);
+    myevent.unsubscribe(this.addNewPostToFeed);
   }
 
+  async addNewPostToFeed({ detail }) {
+    try {
+      const posts = await getPostsByID(detail.payload);
+      this.setState({
+        posts: [...posts, ...this.state.posts]
+      });
+    } catch (error) {
+      notification.error({ message: APP_NAME, description: error.message });
+    }
+  }
   handleScroll = () => {
     if (!this.ticking) {
       window.requestAnimationFrame(() => {
@@ -92,7 +105,6 @@ class Feed extends React.Component {
   }
 
   render() {
-    console.log("parent rendering");
     const { isLoading, isLoadingMore, isLastPage, posts } = this.state;
     const { isLoggedin, userid } = this.props;
 

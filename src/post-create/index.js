@@ -5,7 +5,7 @@ import PostCreateDialog from "./createDailog";
 
 class PostCreate extends React.Component {
   state = {
-    isOpen: true
+    isOpen: false
   };
   openDialog = () => {
     this.setState({ isOpen: true });
