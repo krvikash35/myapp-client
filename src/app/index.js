@@ -90,7 +90,7 @@ class App extends React.Component {
               onLogin={this.onLogin}
             />
           </Layout.Content>
-          <PostCreate />
+          {isLoggedin && <PostCreate />}
           <Footer />
         </Layout>
       </>
