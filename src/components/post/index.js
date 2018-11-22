@@ -64,13 +64,13 @@ class Post extends React.PureComponent {
       userid,
       isLoggedin
     } = this.props;
-    const { fullname, username, _id: ownerUserid } = createdByUser;
+    const { fullname, username } = createdByUser;
     const likesCount = likedBy.length;
     const avatarColor = getAvatarColor(fullname);
     const shortName = fullname.split(" ").reduce((s = "", n) => s + n[0], "");
     const postedAgo = getTimeDifference(new Date(createdAt));
     const isLiked = isLoggedin ? likedBy.some(p => p === userid) : false;
-    const isOwner = isLoggedin ? ownerUserid === userid : false;
+    // const isOwner = isLoggedin ? ownerUserid === userid : false;
 
     return (
       <div className={css.post}>

@@ -90,7 +90,6 @@ export function debounce(fn, time = 0.5) {
   return (...args) => {
     clearTimeout(timeout);
     timeout = setTimeout(() => {
-      console.log("finished");
       timeout = null;
       fn(...args);
     }, time * 1000);
@@ -105,7 +104,6 @@ export function throttle(fn, time = 1) {
       fn(...args);
       setTimeout(() => {
         wait = false;
-        console.log("finished");
       }, time * 1000);
     }
   };

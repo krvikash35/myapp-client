@@ -4,20 +4,20 @@ import Login from "../login";
 import Register from "../register";
 import Feed from "../feed";
 
-const RoutePrivate = ({ component: Component, isLoggedin, ...rest }) => (
-  <Route
-    {...rest}
-    render={props =>
-      isLoggedin ? (
-        <Component {...props} {...rest} />
-      ) : (
-        <Redirect
-          to={{ pathname: "/login", state: { from: props.location } }}
-        />
-      )
-    }
-  />
-);
+// const RoutePrivate = ({ component: Component, isLoggedin, ...rest }) => (
+//   <Route
+//     {...rest}
+//     render={props =>
+//       isLoggedin ? (
+//         <Component {...props} {...rest} />
+//       ) : (
+//         <Redirect
+//           to={{ pathname: "/login", state: { from: props.location } }}
+//         />
+//       )
+//     }
+//   />
+// );
 
 const RouteProtected = ({ component: Component, isLoggedin, ...rest }) => (
   <Route

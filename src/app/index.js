@@ -4,11 +4,10 @@ import css from "./app.module.css";
 import Footer from "./footer";
 import Header from "./header";
 import Routing from "./route";
-import { withRouter, Route } from "react-router-dom";
+import { withRouter } from "react-router-dom";
 import getCurrentUser from "./api";
 import Loader from "../components/loader";
 import { TOKEN_NAME, APP_NAME } from "../utils/constants";
-import Feed from "../feed";
 import PostCreate from "../post-create";
 
 class App extends React.Component {
@@ -95,8 +94,6 @@ class App extends React.Component {
         </Layout>
       </>
     );
-
-    return <Feed />;
   }
 }
 

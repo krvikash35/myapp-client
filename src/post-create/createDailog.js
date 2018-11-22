@@ -23,7 +23,6 @@ class PostCreateDialog extends React.Component {
         this.setState({ isLoading: true });
         const res = await createPost(title, content);
         this.setState({ isLoading: false });
-        console.log("redata", res.data);
         myevent.dispatch(ADD_NEW_POST_FEED, res.data._id);
         this.props.closeDialog();
         notification.success({

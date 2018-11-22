@@ -5,8 +5,8 @@ import Post from "../components/post";
 import Loader from "../components/loader";
 import getPosts, { getPostsByID } from "./api";
 import { POST_SIZE_PER_FETCH } from "./constants";
-import { demoPostsData, APP_NAME, ADD_NEW_POST_FEED } from "../utils/constants";
-import { debounce, throttle } from "../utils/api";
+import { APP_NAME, ADD_NEW_POST_FEED } from "../utils/constants";
+import { debounce } from "../utils/api";
 import myevent from "../utils/event";
 
 class Feed extends React.Component {
@@ -23,14 +23,12 @@ class Feed extends React.Component {
     this.state = {
       isLoading: true,
       isLoadingMore: false,
-      isLastPage: true,
       posts: [],
       isLastPage: false
     };
   }
 
   componentDidMount() {
-    console.log("mounted", this.state.posts);
     this._isUnmounted = false;
     this.loadPosts();
     window.addEventListener("scroll", this.handleScrollDebounced);
@@ -44,6 +42,7 @@ class Feed extends React.Component {
   }
 
   async addNewPostToFeed({ detail }) {
+    if (detail.type !== ADD_NEW_POST_FEED) return;
     try {
       const posts = await getPostsByID(detail.payload);
       this.setState({
